@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
             case R.id.Btn_comecar: // Abre uma nova janela
                 Intent Jan = new Intent(this, LoginActivity.class);
                 startActivity(Jan);
+                // ola
                 break;
             case R.id.Btn_ajudar: // abre uma pagina web
                 Intent Janela = new Intent(this, AjudaActivity.class);
