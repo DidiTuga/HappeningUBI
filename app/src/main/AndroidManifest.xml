@@ -13,6 +13,20 @@
         android:theme="@style/Theme.HappeningUBI"
         tools:targetApi="31">
         <activity
+            android:name=".EventosActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".RegistarActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AjudaActivity"
             android:exported="false">
             <meta-data

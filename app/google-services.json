@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "912137219401",
+    "project_id": "happeningubi-d2018",
+    "storage_bucket": "happeningubi-d2018.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912137219401:android:eafb9033dd8dc8f2447e98",
+        "android_client_info": {
+          "package_name": "pt.ubi.di.pdm.happening"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912137219401-ir1qvam2km7rjmmtk73gdq9cljqvth34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD55j07NC2BaGSw3dq5Vcdh3F1da9PiNX8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912137219401-ir1qvam2km7rjmmtk73gdq9cljqvth34.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
