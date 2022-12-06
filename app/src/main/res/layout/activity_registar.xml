@@ -5,6 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegistarActivity">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/Edt_movel"
+        android:layout_width="325dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="272dp"
+        android:ems="10"
+        android:hint="@string/STR_movel"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/Edt_nome"
+        android:layout_width="325dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="208dp"
+        android:ems="10"
+        android:hint="@string/STR_nome"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,17 +40,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="230dp"
-        android:layout_height="222dp"
-        android:layout_marginTop="147dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@mipmap/ic_launcher" />
 
     <Button
         android:id="@+id/Btn_voltar"
@@ -62,15 +76,27 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/Edt_email1"
+        android:id="@+id/Edt_idade"
         android:layout_width="325dp"
         android:layout_height="55dp"
         android:layout_marginTop="399dp"
         android:ems="10"
+        android:hint="@string/STR_idade"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/Edt_email1"
+        android:layout_width="325dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="336dp"
+        android:ems="10"
         android:hint="@string/STR_email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

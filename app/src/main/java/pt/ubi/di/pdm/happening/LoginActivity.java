@@ -2,9 +2,11 @@ package pt.ubi.di.pdm.happening;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,8 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     // Variaveis edittexts
-
-    EditText nome, password;
+    private ProgressBar progressBar;
+    private EditText nome, password;
     FirebaseAuth mAuth;
 
     @Override
@@ -31,6 +33,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         nome = findViewById(R.id.Edt_nome);
         nome.setOnClickListener(this);
         password = findViewById(R.id.Edt_password);
+        progressBar = findViewById(R.id.prog);
+        progressBar.setVisibility(View.INVISIBLE);
         password.setOnClickListener(this);
         // ver se esta logado
         mAuth = FirebaseAuth.getInstance();
@@ -47,6 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.Txt_registar:
                 Intent Jan = new Intent(this, RegistarActivity.class);
                 startActivity(Jan);
+                finish();
                 break;
             case R.id.Edt_nome:
                 nome.setText("");
@@ -70,8 +75,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }else{
             mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this, task -> {
                 if(task.isSuccessful()){
-                    Intent Jan = new Intent(this, EventosActivity.class);
-                    startActivity(Jan);
+                    progressBar.setVisibility(View.VISIBLE);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBar.setVisibility(View.GONE);
+                            Intent Jan = new Intent(getApplicationContext(), EventosActivity.class);
+                            startActivity(Jan);
+                            finish();
+                        }}, 3000);
+
                 }else{
                     Uteis.MSG(getApplicationContext(), "Erro ao logar");
                 }

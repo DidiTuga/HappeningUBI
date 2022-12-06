@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
             case R.id.Btn_ajudar: // abre uma pagina web
                 Intent Janela = new Intent(this, AjudaActivity.class);
                 startActivity(Janela);
+                finish();
                 break;
             default:
                 Uteis.MSG(getApplicationContext(), "Esqueceste do on click");

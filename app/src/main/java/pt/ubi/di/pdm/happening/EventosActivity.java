@@ -29,9 +29,10 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser == null){
-            finish();
+
             // voltar para o login se nao tiver logado
             startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
         else {
             // se estiver logado
