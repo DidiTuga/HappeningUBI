@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--specifying item for displaying option-->
+    <item
+        android:id="@+id/idPerfil"
+        android:icon="@drawable/ic_perfil"
+        android:title="Perfil"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/idLogOut"
+        android:title="Log Out"
+        android:icon="@drawable/ic_logout"
+        app:showAsAction="ifRoom"/>
+
+
+</menu>

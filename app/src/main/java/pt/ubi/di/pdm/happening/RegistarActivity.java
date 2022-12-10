@@ -86,32 +86,31 @@ public class RegistarActivity extends AppCompatActivity implements View.OnClickL
     }
 
     // funcao para criar user
-    public void createUser(){
+    public void createUser() {
         String email_ = email.getText().toString();
         String pass = password.getText().toString();
-        if(email_.isEmpty() || pass.isEmpty()){
+        if (email_.isEmpty() || pass.isEmpty()) {
             Uteis.MSG(getApplicationContext(), "Preencha todos os campos");
-        }else{
+        } else {
             mAuth.createUserWithEmailAndPassword(email_, pass).addOnCompleteListener(this, task -> {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Uteis.MSG(getApplicationContext(), "Registado com sucesso");
                     saveuser();
                     Intent Jan = new Intent(this, LoginActivity.class);
                     startActivity(Jan);
                     finish();
-                }else{
+                } else {
                     String erro;
-                    try{
+                    try {
                         throw task.getException();
 
-                    }catch (FirebaseAuthWeakPasswordException e){
-                           erro = "Digite uma password que tenha no minimo 6 caracteres";
-                    }catch (FirebaseAuthUserCollisionException e){
+                    } catch (FirebaseAuthWeakPasswordException e) {
+                        erro = "Digite uma password que tenha no minimo 6 caracteres";
+                    } catch (FirebaseAuthUserCollisionException e) {
                         erro = "Essa conta já existe";
-                    }catch (FirebaseAuthInvalidCredentialsException e){
+                    } catch (FirebaseAuthInvalidCredentialsException e) {
                         erro = "Email inválido";
-                    }
-                    catch (Exception e){
+                    } catch (Exception e) {
                         erro = "Erro ao registar";
                     }
                     Uteis.MSG(getApplicationContext(), erro);
@@ -119,7 +118,8 @@ public class RegistarActivity extends AppCompatActivity implements View.OnClickL
             });
         }
     }
-    private void saveuser(){
+
+    private void saveuser() {
         String nome_ = nome.getText().toString();
         String telemovel_ = telemovel.getText().toString();
         String idade_ = idade.getText().toString();
@@ -139,7 +139,7 @@ public class RegistarActivity extends AppCompatActivity implements View.OnClickL
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Uteis.MSG_Log("Error saving user"+ e.toString());
+                Uteis.MSG_Log("Error saving user" + e);
             }
         });
 

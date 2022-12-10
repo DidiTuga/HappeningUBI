@@ -80,10 +80,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void run() {
                             progressBar.setVisibility(View.GONE);
+                            Uteis.MSG(getApplicationContext(), "Login efetuado com sucesso");
                             Intent Jan = new Intent(getApplicationContext(), EventosActivity.class);
                             startActivity(Jan);
-                            finish();
-                        }}, 3000);
+                        }}, 2000);
 
                 }else{
                     Uteis.MSG(getApplicationContext(), "Erro ao logar");
