@@ -16,29 +16,23 @@ android:layout_height="wrap_content">
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/idTILEventoNome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:hint="@string/STR_cnome"
-        android:padding="5dp"
-        android:textColorHint="@color/overButton"
-        app:hintTextColor="@color/overButton"
-        app:boxBackgroundColor="@color/backgroud_2">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/Edt_eventoNome"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="45dp"
             android:ems="10"
+            android:hint="@string/STR_cnome"
+            android:textColorHint="@color/escrever"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
             android:importantForAutofill="no"
             android:inputType="textImeMultiLine|textMultiLine"
             android:textColor="@color/escrever"
+            android:backgroundTint="@color/button"
             android:textSize="14sp" />
-    </com.google.android.material.textfield.TextInputLayout>
 
 
     <Button
@@ -56,29 +50,24 @@ android:layout_height="wrap_content">
         android:textSize="14sp"
         app:boxStrokeColor="@color/purple_200" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/idTILeventoGeo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:hint="Localização"
-        android:padding="5dp"
-        android:textColorHint="@color/overButton"
-        app:hintTextColor="@color/overButton"
-        app:boxBackgroundColor="@color/backgroud_2">
+
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/Edt_geopoint"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="45dp"
             android:ems="10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
+            android:backgroundTint="@color/button"
             android:importantForAutofill="no"
-            android:inputType=""
+            android:inputType="text"
+            android:textColorHint="@color/escrever"
+            android:hint="Localização"
             android:textColor="@color/escrever"
             android:textSize="14sp" />
-    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/Btn_image"
@@ -97,30 +86,24 @@ android:layout_height="wrap_content">
         android:textSize="14sp" />
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/idTILEventoDescription"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:hint="@string/STR_descricao"
-        android:padding="5dp"
-        android:textColorHint="@color/overButton"
-        app:hintTextColor="@color/overButton"
-        app:boxBackgroundColor="@color/backgroud_2"
-        >
+
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/Edt_desEvento"
-            android:layout_width="380dp"
+            android:layout_width="match_parent"
             android:layout_height="185dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@color/button"
+            android:padding="5dp"
             android:ems="10"
+            android:hint="@string/STR_descricao"
+            android:textColorHint="@color/escrever"
             android:importantForAutofill="no"
             android:inputType="textLongMessage|textImeMultiLine|textMultiLine"
             android:textColor="@color/escrever"
             android:textSize="14sp" />
-    </com.google.android.material.textfield.TextInputLayout>
 
 
     <ProgressBar

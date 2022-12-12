@@ -43,10 +43,10 @@ public class Evento_Separado extends AppCompatActivity implements View.OnClickLi
         y.setOnClickListener(this);
         // colocar os dados nos textviews/imagens
         Picasso.with(this).load(link).into((imagem1));
-        descricao1.setText(descricao);
-        local1.setText(local);
-        data1.setText(data);
-        nome1.setText(nome);
+        descricao1.setText("Descrição: "+descricao);
+        local1.setText("Local: "+local);
+        data1.setText("Data: "+data);
+        nome1.setText("Nome: "+nome);
         // se o evento for do utilizador logado, aparece o botao de apagar
         if (id.equals(mAuth.getCurrentUser().getUid())) {
             y.setVisibility(View.VISIBLE);

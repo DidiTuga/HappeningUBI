@@ -9,7 +9,8 @@
 
     <ImageView
         android:id="@+id/Img_evento_separado"
-        android:layout_width="278dp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="10dp"
         android:layout_height="331dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,8 +21,9 @@
 
     <TextView
         android:id="@+id/Txt_nomeEvento_separado"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginTop="20dp"
         android:text="Nome"
         android:textSize="20dp"
@@ -34,8 +36,9 @@
 
     <TextView
         android:id="@+id/Txt_dataEvento_separado"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginTop="24dp"
         android:text="TextView"
         android:textSize="18dp"
@@ -47,8 +50,9 @@
 
     <TextView
         android:id="@+id/Txt_descricaoEvento_separado"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginTop="28dp"
         android:text="TextView"
         android:textSize="18dp"
@@ -60,8 +64,9 @@
 
     <TextView
         android:id="@+id/Txt_localEvento_separado"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginTop="36dp"
         android:text="TextView"
         android:textSize="18dp"
@@ -73,8 +78,9 @@
 
     <Button
         android:id="@+id/Btn_ApagarEvento_separado"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginTop="92dp"
         android:backgroundTint="@color/button"
         android:text="@string/Str_apagarE"

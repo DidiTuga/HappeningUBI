@@ -129,7 +129,6 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.Btn_adicionar:
                 Intent Jan = new Intent(this, Ad_evento.class);
                 startActivity(Jan);
-                finish();
                 break;
             default:
                 Uteis.MSG(getApplicationContext(), "Esqueceste do on click");

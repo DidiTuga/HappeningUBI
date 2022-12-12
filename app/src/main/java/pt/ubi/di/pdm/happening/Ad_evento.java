@@ -144,6 +144,8 @@ public class Ad_evento extends AppCompatActivity implements View.OnClickListener
         minuteFinal = i1;
         Uteis.MSG(this, dayFinal + "/" + monthFinal + "/" + yearFinal + " " + hourFinal + ":" + minuteFinal);
     }
+
+
     private void criarEvento() {
         String nomeEvento = nome.getText().toString();
         String descricaoEvento = descricao.getText().toString();
