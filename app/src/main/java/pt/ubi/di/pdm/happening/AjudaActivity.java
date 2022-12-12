@@ -1,8 +1,8 @@
 package pt.ubi.di.pdm.happening;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AjudaActivity extends AppCompatActivity {
 
