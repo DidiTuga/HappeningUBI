@@ -70,10 +70,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     // funcao para fazer login
     public void loginUser(){
         // MUDAR DEPOIS
-        String email = nome.getText().toString();
-        String pass = password.getText().toString();
-        //String email = "diogo@gmail.pt";
-        //String pass = "123456";
+        //String email = nome.getText().toString();
+        //String pass = password.getText().toString();
+        String email = "diogo@gmail.pt";
+        String pass = "123456";
         if(email.isEmpty() || pass.isEmpty()){
             Uteis.MSG(getApplicationContext(), "Preencha todos os campos");
         }else{

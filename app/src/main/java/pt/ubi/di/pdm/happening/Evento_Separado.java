@@ -4,16 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 public class Evento_Separado extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth mAuth;
+    private String nome, link;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,11 +26,11 @@ public class Evento_Separado extends AppCompatActivity implements View.OnClickLi
         mAuth = FirebaseAuth.getInstance();
         // ir buscar os dados do evento
         Intent intent = getIntent();
-        String nome = intent.getStringExtra("nome");
+         nome = intent.getStringExtra("nome");
         String descricao = intent.getStringExtra("descricao");
         String local = intent.getStringExtra("local");
         String data = intent.getStringExtra("data");
-        String link = intent.getStringExtra("link");
+         link = intent.getStringExtra("link");
         String id = intent.getStringExtra("id_user");
         // inicializar os textviews/imagens/buttons
         TextView nome1 = findViewById(R.id.Txt_nomeEvento_separado);
@@ -63,6 +68,25 @@ public class Evento_Separado extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()) {
             case R.id.Btn_ApagarEvento_separado:
                 // apagar o evento na base de dados e a imagem
+                StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(link);
+                if (storageReference != null) {
+                    storageReference.delete();
+                }
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("eventos").document(nome).delete().addOnCompleteListener(task -> {
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(Evento_Separado.this, EventosActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }, 1500);
+
+                });
+
+
 
                 break;
         }

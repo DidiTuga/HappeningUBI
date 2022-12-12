@@ -45,6 +45,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -125,7 +126,6 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
                                 String descricao = document.getString("Descricao");
                                 String local = document.getString("Local");
                                 String link = document.getString("ImagemLink");
-                                Uteis.MSG_Debug( "nome: " + nome + " descricao: " + descricao + " local: " + local + " link: " + link);
                                 Timestamp data = document.getTimestamp("Data");
                                 String id_user = document.getString("Id_User");
                                 // ir buscar o dia anterior para nao aparecer os eventos que ja passaram
@@ -175,7 +175,10 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
         intent.putExtra("descricao", eventos.get(position).getDescricao());
         intent.putExtra("local", eventos.get(position).getLocal());
         intent.putExtra("link", eventos.get(position).getLink());
-        intent.putExtra("data", eventos.get(position).getData().toDate());
+        Date date = eventos.get(position).getData().toDate();
+        DateFormat formatter = DateFormat.getDateTimeInstance();
+        String dateFormatted = formatter.format(date);
+        intent.putExtra("data", dateFormatted);
         intent.putExtra("id_user", eventos.get(position).getId_user());
         startActivity(intent);
     }

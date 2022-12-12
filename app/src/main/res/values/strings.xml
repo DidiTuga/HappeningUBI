@@ -20,4 +20,5 @@
     <string name="Str_geo">Geopoint do evento</string>
     <string name="Str_linkImage">Upload Imagem</string>
     <string name="Str_date">Data do Evento</string>
+    <string name="Str_apagarE">Apagar Evento</string>
 </resources>

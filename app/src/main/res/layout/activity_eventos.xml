@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/RLeventos"
-    android:background="@color/black_shade_1"
+    android:background="@color/backgroud"
     tools:context=".EventosActivity">
 
     <!--recycler view for our data-->
@@ -30,9 +30,9 @@
         android:layout_marginBottom="20dp"
         android:minHeight="48dp"
         android:src="@drawable/ic_add"
-        app:background="@color/black_shade_1"
-        app:backgroundTint="@color/black_shade_2"
-        app:tint="@color/white"
+        app:background="@color/overButton"
+        app:backgroundTint="@color/button"
+        app:tint="@color/escrever"
         tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
 
