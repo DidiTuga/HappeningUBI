@@ -1,75 +1,77 @@
 package pt.ubi.di.pdm.happening;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.Adapter;
-
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class EventoAdapter extends Adapter<EventoAdapter.ViewHolder> {
-    private ArrayList<Evento> eventos;
+public class EventoAdapter extends RecyclerView.Adapter<EventoAdapter.ViewHolder> {
+    private final RecyclerViewInterface recyclerViewInterface;
     private Context context;
-    int lastPos = -1;
+    private ArrayList<Evento> eventos;
 
-    public EventoAdapter(ArrayList<Evento> eventos, EventosActivity eventosActivity) {
+    public EventoAdapter(Context context, ArrayList<Evento> eventos, RecyclerViewInterface recyclerViewInterface) {
+        this.context = context;
         this.eventos = eventos;
-        this.context = eventosActivity;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
-
-
     @NonNull
     @Override
     public EventoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.evento_rv_item, parent, false);
-        return new ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.evento_card, parent, false);
+        return new ViewHolder(view, recyclerViewInterface);
     }
 
     @Override
     public void onBindViewHolder(@NonNull EventoAdapter.ViewHolder holder, int position) {
-        Evento evento = eventos.get(position);
-        Picasso.get().load(evento.getLink()).into(holder.image);
-        holder.nome.setText(evento.getNome());
-        holder.data.setText(evento.getData().toString());
-        /*holder.image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                eventoClickInterface.onEventoClick(position);
-            }
-        });*/
+        Picasso.with(context).load(eventos.get(position).getLink()).into(holder.imagem);
+        holder.nome.setText(eventos.get(position).getNome());
+        // timestamp to date
+        Date date = eventos.get(position).getData().toDate();
+        DateFormat formatter = DateFormat.getDateTimeInstance();
+        String dateFormatted = formatter.format(date);
+        holder.data.setText(dateFormatted);
 
-
-
+        holder.local.setText(eventos.get(position).getLocal());
     }
 
     @Override
     public int getItemCount() {
         return eventos.size();
     }
-
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        //creating variable for our image view and text view on below line.
-        private ImageView image;
-        private TextView nome, data;
-
-        public ViewHolder(@NonNull View itemView) {
+        public ImageView imagem;
+        public TextView nome, data, local;
+        public ViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
-            //initializing all our variables on below line.
-            image = itemView.findViewById(R.id.Img_evento1);
+            imagem = itemView.findViewById(R.id.Img_evento1);
             nome = itemView.findViewById(R.id.Txt_nomeEvento);
             data = itemView.findViewById(R.id.Txt_dataEvento);
+            local = itemView.findViewById(R.id.Txt_localEvento);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (recyclerViewInterface != null) {
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION) {
+                            recyclerViewInterface.onEventoClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
-    //creating a interface for on click
 
 }

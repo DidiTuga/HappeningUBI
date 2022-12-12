@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@android:mipmap/sym_def_app_icon" />
+        tools:srcCompat="@drawable/ic_launcher_background" />
 
     <Button
         android:id="@+id/Btn_comecar"

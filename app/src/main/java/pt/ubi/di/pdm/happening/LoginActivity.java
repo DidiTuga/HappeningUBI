@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     // Variaveis edittexts
@@ -68,8 +69,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     // funcao para fazer login
     public void loginUser(){
+        // MUDAR DEPOIS
         String email = nome.getText().toString();
         String pass = password.getText().toString();
+        //String email = "diogo@gmail.pt";
+        //String pass = "123456";
         if(email.isEmpty() || pass.isEmpty()){
             Uteis.MSG(getApplicationContext(), "Preencha todos os campos");
         }else{
@@ -80,10 +84,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void run() {
                             progressBar.setVisibility(View.GONE);
-                            Uteis.MSG(getApplicationContext(), "Login efetuado com sucesso");
                             Intent Jan = new Intent(getApplicationContext(), EventosActivity.class);
                             startActivity(Jan);
-                        }}, 2000);
+                        }}, 1000);
 
                 }else{
                     Uteis.MSG(getApplicationContext(), "Erro ao logar");

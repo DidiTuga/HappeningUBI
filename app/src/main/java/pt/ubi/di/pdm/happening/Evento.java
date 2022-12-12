@@ -8,13 +8,15 @@ public class Evento {
     String descricao;
     String local;
     String link;
+    String id_user;
     Timestamp data;
 
-    public Evento(String nome, String descricao, String local, String link, Timestamp data) {
+    public Evento(String nome, String descricao, String local, String link, Timestamp data, String id_user) {
         this.nome = nome;
         this.descricao = descricao;
         this.local = local;
         this.link = link;
+        this.id_user = id_user;
         this.data = data;
     }
 
@@ -56,6 +58,14 @@ public class Evento {
 
     public void setData(Timestamp data) {
         this.data = data;
+    }
+
+    public String getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(String id_user) {
+        this.id_user = id_user;
     }
 
 }

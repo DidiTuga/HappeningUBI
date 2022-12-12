@@ -6,6 +6,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
@@ -43,7 +45,7 @@ public class Ad_evento extends AppCompatActivity implements View.OnClickListener
     private EditText descricao, local, nome, link;
     private int day, month, year, hour, minute;
     private int dayFinal, monthFinal, yearFinal, hourFinal, minuteFinal;
-
+    private ProgressBar progressBar;
     private Uri imageUri;
     private String imageUrl;
     private ImageView img;
@@ -57,16 +59,18 @@ public class Ad_evento extends AppCompatActivity implements View.OnClickListener
         // inicializar botoes
         Button y = findViewById(R.id.Btn_date);
         Button x = findViewById(R.id.Btn_adEvento);
+        Button z = findViewById(R.id.Btn_image);
         x.setOnClickListener(this);
         y.setOnClickListener(this);
-        Button z = findViewById(R.id.Btn_image);
         z.setOnClickListener(this);
+        // img
         img = findViewById(R.id.Img_evento);
         // inicializar edittexts
         descricao = findViewById(R.id.Edt_desEvento);
         local = findViewById(R.id.Edt_geopoint);
         nome = findViewById(R.id.Edt_eventoNome);
-
+        // progressbar
+        progressBar = findViewById(R.id.Pb_eventoad);
         // Storage
         mStorageRef = FirebaseStorage.getInstance().getReference("imagens");
 
@@ -88,9 +92,7 @@ public class Ad_evento extends AppCompatActivity implements View.OnClickListener
         switch (view.getId()) {
             case R.id.Btn_adEvento:
                 criarEvento();
-                Intent i = new Intent(this, EventosActivity.class);
-                startActivity(i);
-                finish();
+
                 break;
             case R.id.Btn_date:
                 Calendar c = Calendar.getInstance();
@@ -116,7 +118,7 @@ public class Ad_evento extends AppCompatActivity implements View.OnClickListener
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100) {
             if (resultCode == RESULT_OK) {
-                Uteis.MSG(this, "Imagem selecionada com sucesso");
+                Uteis.MSG_Log( "Imagem selecionada com sucesso");
                 img.setImageURI(data.getData());
                 // upload da imagem para FireStorage
                 imageUri = data.getData();
@@ -183,36 +185,60 @@ public class Ad_evento extends AppCompatActivity implements View.OnClickListener
             return;
         }
         // upload da imagem para FireStorage
-        StorageReference filepath = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
+        String nomeImagem = System.currentTimeMillis() + "." + getFileExtension(imageUri);
+        StorageReference filepath = mStorageRef.child(nomeImagem);
+        // token de acess para a imagem
+
+
         filepath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Uteis.MSG(Ad_evento.this, "Imagem carregada com sucesso");
+                progressBar.setVisibility(View.GONE);
+                Uteis.MSG_Log( "Imagem carregada com sucesso");
+                // obter o token de acesso
+                filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>(){
+                    public void onSuccess(Uri uri){
+                        String token = uri.toString();
+                        // criar evento
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        Map<String, Object> eventos = new HashMap<>();
+                        AccountID = mAuth.getCurrentUser().getUid();
+                        eventos.put("Id_User", AccountID);
+                        eventos.put("Descricao", descricaoEvento);
+                        eventos.put("Local", localEvento);
+                        eventos.put("ImagemLink", token);
+                        eventos.put("Data", timestamp);
+                        DocumentReference docRef = db.collection("eventos").document(nomeEvento);
+                        docRef.set(eventos).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Uteis.MSG_Log("Eventos saved");
+                                progressBar.setVisibility(View.VISIBLE);
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Intent i = new Intent(getApplicationContext(), EventosActivity.class);
+                                        startActivity(i);
+                                        finish();
+                                    }
+                                }, 1000);
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Uteis.MSG_Log("Error saving Evento"+ e.toString());
+                            }
+                        });
+                    }
+                });
             }
-        });
-        // ir buscar o link da imagem
-       imageUrl = filepath.getDownloadUrl().toString();
-        // criar evento
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Map<String, Object> eventos = new HashMap<>();
-        AccountID = mAuth.getCurrentUser().getUid();
-        eventos.put("Id_User", AccountID);
-        eventos.put("Descricao", descricaoEvento);
-        eventos.put("Local", localEvento);
-        eventos.put("ImagemLink", imageUrl);
-        eventos.put("Data", timestamp);
-        DocumentReference docRef = db.collection("eventos").document(nomeEvento);
-        docRef.set(eventos).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Uteis.MSG_Log("Eventos saved");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
             public void onFailure(@NonNull Exception e) {
-                Uteis.MSG_Log("Error saving Evento"+ e.toString());
+                Uteis.MSG_Log( "Erro ao carregar a imagem");
             }
         });
+
 
     }
 

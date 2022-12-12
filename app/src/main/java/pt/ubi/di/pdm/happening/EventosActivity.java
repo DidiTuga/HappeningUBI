@@ -6,17 +6,29 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Picture;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,18 +38,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
-public class EventosActivity extends AppCompatActivity implements View.OnClickListener {
-    FirebaseAuth mAuth;
-    // firestorage database
+public class EventosActivity extends AppCompatActivity implements View.OnClickListener, RecyclerViewInterface {
+    private FirebaseAuth mAuth;
     private RecyclerView mRecyclerView;
-    StorageReference mStorageRef;
+    private StorageReference mStorageRef;
+    private ProgressBar mProgressCircle;
     ArrayList<Evento> eventos = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,35 +66,31 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
         x.setOnClickListener(this);
         // inicializar recycler view
         mRecyclerView = findViewById(R.id.RvRecycler);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // inicilizar db com os eventos e storage
         mStorageRef = FirebaseStorage.getInstance().getReference("imagens");
         getEventos();
+
     }
+    // metodo para criar o menu
     public boolean onCreateOptionsMenu(Menu menu) {
         //on below line we are inflating our menu file for displaying our menu options.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+    // se clicar nos buttons do menu
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //adding a click listner for option selected on below line.
         int id = item.getItemId();
         switch (id) {
             case R.id.idLogOut:
-                //displaying a toast message on user logged out inside on click.
-                Toast.makeText(getApplicationContext(), "User Logged Out", Toast.LENGTH_LONG).show();
-                //on below line we are signing out our user.
+                // Sair e voltar para o inicio
                 mAuth.signOut();
-                //on below line we are opening our login activity.
                 Intent i = new Intent(this, MainActivity.class);
                 startActivity(i);
                 this.finish();
                 return true;
             case R.id.idPerfil:
-                //displaying a toast message on user logged out inside on click.
-                Toast.makeText(getApplicationContext(), "Perfil", Toast.LENGTH_LONG).show();
-                //on below line we are signing out our user.
-
+                // Ir para o perfil
+                Uteis.MSG(this, "Perfil");
                 return true;
 
             default:
@@ -94,13 +106,13 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
             finish();
         }
         else {
-            // se estiver logado
-            //Uteis.MSG(this, "Bem vindo " + currentUser.getEmail());
         }
 
     }
+
+    // funcao para ir buscar os eventos
     private void getEventos() {
-        // buscar os eventos da db
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("eventos")
                 .get()
@@ -112,25 +124,26 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
                                 String nome = document.getId();
                                 String descricao = document.getString("Descricao");
                                 String local = document.getString("Local");
-                                String link = document.getString("ImageLink");
+                                String link = document.getString("ImagemLink");
+                                Uteis.MSG_Debug( "nome: " + nome + " descricao: " + descricao + " local: " + local + " link: " + link);
                                 Timestamp data = document.getTimestamp("Data");
-                                //Uteis.MSG(EventosActivity.this, "nome: " + nome + " descricao: " + descricao + " local: " + local + " link: " + link + " data: " + data);
-                                eventos.add(new Evento(nome, descricao, local, link, data));
+                                String id_user = document.getString("Id_User");
+                                // ir buscar o dia anterior para nao aparecer os eventos que ja passaram
+                                Date data_atual = new Date();
+                                data_atual.setDate(data_atual.getDate() - 1);
+                                if(data != null && data.toDate().after(data_atual)){
+                                    eventos.add(new Evento(nome, descricao, local, link, data, id_user));
+                                }
                             }
-                            // mostrar os eventos
                             mostrarEventos();
                         } else {
-                            //Log.w(TAG, "Error getting documents.", task.getException());
+                            Uteis.MSG_Log("Error getting documents.");
                         }
                     }
                 });
-
-
     }
 
-    public void OnBackPressed(){
-        // nao deixa voltar para tras
-    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -144,17 +157,26 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
                 break;
         }
     }
+    // funcao para mostrar os eventos
     private void mostrarEventos(){
         // mostrar os eventos no recycler view
-        EventoAdapter adapter = new EventoAdapter(eventos, this);
+        EventoAdapter adapter = new EventoAdapter(this, eventos, this);
         mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
+    }
 
-
-
-
-
-
-
+    // funcao para abrir o evento
+    @Override
+    public void onEventoClick(int position) {
+        Intent intent = new Intent(this, Evento_Separado.class);
+        // passar o evento para a outra activity
+        intent.putExtra("nome", eventos.get(position).getNome());
+        intent.putExtra("descricao", eventos.get(position).getDescricao());
+        intent.putExtra("local", eventos.get(position).getLocal());
+        intent.putExtra("link", eventos.get(position).getLink());
+        intent.putExtra("data", eventos.get(position).getData().toDate());
+        intent.putExtra("id_user", eventos.get(position).getId_user());
+        startActivity(intent);
     }
 }
