@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroud"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="227dp"
+        android:layout_margin="10dp"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/Txt_nomeUser_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="TextView"
+        android:textColor="@color/escrever"
+        android:textColorHint="@color/escrever"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/Edt_novoEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/button"
+        android:ems="10"
+        android:hint="@string/STR_email"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:textColor="@color/escrever"
+        android:textColorHint="@color/escrever"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/Edt_novoTelefone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/button"
+        android:ems="10"
+        android:hint="@string/STR_movel"
+        android:inputType="phone"
+        android:minHeight="48dp"
+        android:textColor="@color/escrever"
+        android:textColorHint="@color/escrever"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/Edt_novaIdade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/button"
+        android:ems="10"
+        android:hint="@string/STR_idade"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:textColor="@color/escrever"
+        android:textColorHint="@color/escrever"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/Edt_novaPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/button"
+        android:ems="10"
+        android:hint="@string/Str_novaPass"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textColor="@color/escrever"
+        android:textColorHint="@color/escrever"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        >
+
+        <Button
+            android:id="@+id/Btn_editarUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:layout_margin="10dp"
+            android:textColor="@color/escrever"
+            android:backgroundTint="@color/button"
+            android:text="Editar" />
+
+        <Button
+            android:id="@+id/Btn_apagarUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/red"
+            android:textColor="@color/escrever"
+            android:text="Apagar" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/Pb_editarUser"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+
+        android:layout_height="37dp" />
+
+</LinearLayout>

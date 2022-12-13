@@ -2,6 +2,7 @@ package pt.ubi.di.pdm.happening;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,7 +35,7 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
     private RecyclerView mRecyclerView;
     private StorageReference mStorageRef;
     private ProgressBar mProgressCircle;
-    ArrayList<Evento> eventos = new ArrayList<>();
+    private ArrayList<Evento> eventos = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,9 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
         x.setOnClickListener(this);
         // inicializar recycler view
         mRecyclerView = findViewById(R.id.RvRecycler);
+        // inicilizar progress bar
+        mProgressCircle = findViewById(R.id.progress_circle);
+        mProgressCircle.setVisibility(View.VISIBLE);
         // inicilizar db com os eventos e storage
         mStorageRef = FirebaseStorage.getInstance().getReference("imagens");
         getEventos();
@@ -61,8 +65,7 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.idLogOut:
-                // Sair e voltar para o inicio
+            case R.id.idLogOut:  // Sair e voltar para o inicio
                 mAuth.signOut();
                 Intent i = new Intent(this, MainActivity.class);
                 startActivity(i);
@@ -70,18 +73,20 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
                 return true;
             case R.id.idPerfil:
                 // Ir para o perfil
-                Uteis.MSG(this, "Perfil");
+                Intent j = new Intent(this, PerfilActivity.class);
+                startActivity(j);
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    // se nao tiver logado volta para o inicio
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser == null){
-            // voltar para o login se nao tiver logado
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
@@ -90,7 +95,8 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    // funcao para ir buscar os eventos
+    // get eventos da db
+    // vai buscar todos os eventos e adiciona só os eventos das ultimas 24horas para cima
     private void getEventos() {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -114,6 +120,7 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
                                     eventos.add(new Evento(nome, descricao, local, link, data, id_user));
                                 }
                             }
+                            // inicializar o recycler view
                             mostrarEventos();
                         } else {
                             Uteis.MSG_Log("Error getting documents.");
@@ -126,8 +133,8 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.Btn_adicionar:
-                Intent Jan = new Intent(this, Ad_evento.class);
+            case R.id.Btn_adicionar: // se clicar no botao de adicionar vai para a pagina de criar evento
+                Intent Jan = new Intent(this, AdicionarEventoActivity.class);
                 startActivity(Jan);
                 break;
             default:
@@ -136,15 +143,26 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
     // funcao para mostrar os eventos
+    // Usa o adapter para ver a quantidade de eventos e mostrar na recycler view em linear layout
+    // fica a carregar ate que os eventos estejam todos carregados
     private void mostrarEventos(){
         // mostrar os eventos no recycler view
+        mRecyclerView.setVisibility(View.INVISIBLE);
         EventoAdapter adapter = new EventoAdapter(this, eventos, this);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mProgressCircle.setVisibility(View.GONE);
+                mRecyclerView.setVisibility(View.VISIBLE);
+            }
+        }, 1500);
     }
 
-    // funcao para abrir o evento
+    // Função para ir para a pagina do evento_selecionado
+    // Manda os dados do evento selecionado para a pagina do evento
     @Override
     public void onEventoClick(int position) {
         Intent intent = new Intent(this, Evento_Separado.class);

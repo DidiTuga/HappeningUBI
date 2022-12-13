@@ -31,13 +31,12 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-
             case R.id.Btn_comecar: // Abre uma nova janela
                 Intent Jan = new Intent(this, LoginActivity.class);
                 startActivity(Jan);
-                // ola
+                finish();
                 break;
-            case R.id.Btn_ajudar: // abre uma pagina web
+            case R.id.Btn_ajudar: // abre uma janela que vai explicar como funciona a aplicação
                 Intent Janela = new Intent(this, AjudaActivity.class);
                 startActivity(Janela);
                 finish();

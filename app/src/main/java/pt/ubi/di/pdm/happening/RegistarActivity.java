@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -50,7 +51,17 @@ public class RegistarActivity extends AppCompatActivity implements View.OnClickL
         idade.setOnClickListener(this);
 
         // ver se esta logado
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance(); // vai ser null provavelmente
+    }
+    public void onStart(){
+        super.onStart();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            // user está logado
+            Intent Jan = new Intent(this, EventosActivity.class);
+            startActivity(Jan);
+            finish();
+        }
     }
 
     @Override
@@ -59,25 +70,10 @@ public class RegistarActivity extends AppCompatActivity implements View.OnClickL
             case R.id.Btn_registar:
                 createUser();
                 break;
-            case R.id.Btn_voltar:
+            case R.id.Btn_voltar: // voltar para a pagina de login
                 Intent Jan = new Intent(this, LoginActivity.class);
                 startActivity(Jan);
                 finish();
-                break;
-            case R.id.Edt_email1:
-                email.setText("");
-                break;
-            case R.id.Edt_password1:
-                password.setText("");
-                break;
-            case R.id.Edt_nome:
-                nome.setText("");
-                break;
-            case R.id.Edt_movel:
-                telemovel.setText("");
-                break;
-            case R.id.Edt_idade:
-                idade.setText("");
                 break;
             default:
                 Uteis.MSG(getApplicationContext(), "Esqueceste do on click");
@@ -86,11 +82,20 @@ public class RegistarActivity extends AppCompatActivity implements View.OnClickL
     }
 
     // funcao para criar user
+    // vai buscar os dados dos edittexts e cria um user com esses dados na Firebase Authentication
+    // depois cria um documento na Firebase Firestore com os dados do user
     public void createUser() {
         String email_ = email.getText().toString();
         String pass = password.getText().toString();
         if (email_.isEmpty() || pass.isEmpty()) {
-            Uteis.MSG(getApplicationContext(), "Preencha todos os campos");
+            if (email_.isEmpty()) {
+                email.setError("Email vazio");
+                email.requestFocus();
+            }
+            if (pass.isEmpty()) {
+                password.setError("Password vazia");
+                password.requestFocus();
+            }
         } else {
             mAuth.createUserWithEmailAndPassword(email_, pass).addOnCompleteListener(this, task -> {
                 if (task.isSuccessful()) {
@@ -118,7 +123,7 @@ public class RegistarActivity extends AppCompatActivity implements View.OnClickL
             });
         }
     }
-
+    // funcao para guardar os dados do user na base de dados
     private void saveuser() {
         String nome_ = nome.getText().toString();
         String telemovel_ = telemovel.getText().toString();

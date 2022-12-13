@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     // Variaveis edittexts
@@ -40,26 +41,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         password.setOnClickListener(this);
         // ver se esta logado
         FirebaseApp.initializeApp(this);
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance(); // null se nao estiver logado
 
 
+    }
+    // Ver se esta logado
+    public void onStart(){
+        super.onStart();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            // user está logado
+            Intent Jan = new Intent(this, EventosActivity.class);
+            startActivity(Jan);
+            finish();
+        }
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.Btn_entrar:
+            case R.id.Btn_entrar: // Vai tentar os dados do utilizador
                 loginUser();
                 break;
-            case R.id.Txt_registar:
+            case R.id.Txt_registar: // Vai para a activity de registar
                 Intent Jan = new Intent(this, RegistarActivity.class);
                 startActivity(Jan);
                 finish();
                 break;
-            case R.id.Edt_nome:
+            case R.id.Edt_nome: // Limpa o edittext
                 nome.setText("");
                 break;
-            case R.id.Edt_password:
+            case R.id.Edt_password: // Limpa o edittext
                 password.setText("");
                 break;
             default:
@@ -70,12 +82,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     // funcao para fazer login
+    // Vai buscar os dados do utilizador e tenta fazer login
+    // Se conseguir vai para a pagina principal se nao dá uma mensagem de erro
     public void loginUser(){
-        // MUDAR DEPOIS
-        //String email = nome.getText().toString();
-        //String pass = password.getText().toString();
-        String email = "diogo@gmail.pt";
-        String pass = "123456";
+        String email = nome.getText().toString();
+        String pass = password.getText().toString();
         if(email.isEmpty() || pass.isEmpty()){
             Uteis.MSG(getApplicationContext(), "Preencha todos os campos");
         }else{

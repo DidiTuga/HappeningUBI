@@ -54,6 +54,7 @@ public class Evento_Separado extends AppCompatActivity implements View.OnClickLi
 
 
     }
+    // Ver se o utilizador está logado
     public void onStart() {
         super.onStart();
         // ver se esta logado
@@ -66,7 +67,7 @@ public class Evento_Separado extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.Btn_ApagarEvento_separado:
+            case R.id.Btn_ApagarEvento_separado: // Vai apagar o evento e volta mas espera um 1.5s para atualizar a db
                 // apagar o evento na base de dados e a imagem
                 StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(link);
                 if (storageReference != null) {

@@ -17,9 +17,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class EventoAdapter extends RecyclerView.Adapter<EventoAdapter.ViewHolder> {
-    private final RecyclerViewInterface recyclerViewInterface;
-    private Context context;
-    private ArrayList<Evento> eventos;
+    private final RecyclerViewInterface recyclerViewInterface; // Buscar a posicao do evento
+    private Context context; // Contexto
+    private ArrayList<Evento> eventos; // Array de eventos
 
     public EventoAdapter(Context context, ArrayList<Evento> eventos, RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
@@ -28,12 +28,14 @@ public class EventoAdapter extends RecyclerView.Adapter<EventoAdapter.ViewHolder
     }
     @NonNull
     @Override
+    // Criar o view holder com o layout do evento card
     public EventoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.evento_card, parent, false);
         return new ViewHolder(view, recyclerViewInterface);
     }
 
     @Override
+    // Buscar os valores para colocar no evento card
     public void onBindViewHolder(@NonNull EventoAdapter.ViewHolder holder, int position) {
         Picasso.with(context).load(eventos.get(position).getLink()).into(holder.imagem);
         holder.nome.setText(eventos.get(position).getNome());
