@@ -4,6 +4,10 @@
 O principal objetivo deste projeto é o de implementar uma aplicação para smartphone e respetivo suporte remoto (base de dados + interface programática web) para partilha
 rápida de eventos na UBI. A ideia é permitir que todos os utilizadores da aplicação possam rapidamente difundir um evento que esteja a acontecer na UBI para esta rede interna (de utilizadores registados). A aplicação deve ser fácil de usar e direta.
 
+### Base de dados usada: FireBase
+
+### Funcionalidades
+
 ```md
 Funcionalidades Pedidas
 ---
