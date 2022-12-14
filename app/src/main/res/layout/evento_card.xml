@@ -47,13 +47,14 @@
             android:textColor="@color/escrever"
             android:textSize="15sp"
             android:textStyle="bold" />
+
         <TextView
             android:id="@+id/Txt_localEvento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Img_evento1"
-            android:layout_toLeftOf="@id/Txt_dataEvento"
             android:layout_margin="3dp"
+            android:layout_toLeftOf="@id/Txt_dataEvento"
             android:gravity="center"
             android:padding="4dp"
             android:text="Local"

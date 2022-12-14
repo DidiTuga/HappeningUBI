@@ -1,28 +1,27 @@
 package pt.ubi.di.pdm.happening;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.UserHandle;
 import android.text.Html;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Objects;
 
 public class EditarPerfilActivity extends AppCompatActivity implements View.OnClickListener {
     private FirebaseUser user;
@@ -34,6 +33,8 @@ public class EditarPerfilActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_perfil);
+        // Mudar o título da action bar
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Editar Perfil");
         // ir buscar os dados do user
         Intent intent = getIntent();
         String nome = intent.getStringExtra("nome");
@@ -71,16 +72,12 @@ public class EditarPerfilActivity extends AppCompatActivity implements View.OnCl
                 }
             });
         } else { // user não está logado
-            Intent intent1 = new Intent(this, LoginActivity.class);
-            startActivity(intent1);
             finish();
         }
     }
 
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(EditarPerfilActivity.this, PerfilActivity.class);
-        startActivity(intent);
         finish();
     }
 
@@ -144,6 +141,7 @@ public class EditarPerfilActivity extends AppCompatActivity implements View.OnCl
                 break;
         }
     }
+
     // ApagarUser
     // Apaga o user da base de dados e do firebase auth
     private void apagarUser() {
@@ -172,7 +170,8 @@ public class EditarPerfilActivity extends AppCompatActivity implements View.OnCl
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
-                        public void run() {
+                        public void run() { // voltar para a pagina de login e fazer login
+                            mAuth.signOut();
                             Intent intent = new Intent(EditarPerfilActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
@@ -241,23 +240,21 @@ public class EditarPerfilActivity extends AppCompatActivity implements View.OnCl
                                                 @Override
                                                 public void run() {
                                                     Pb.setVisibility(View.GONE);
-                                                    Intent intent = new Intent(EditarPerfilActivity.this, PerfilActivity.class);
-                                                    startActivity(intent);
                                                     finish();
                                                 }
                                             }, 1000);
                                         } else {
-                                            Uteis.MSG_Debug(task.getException().getMessage());
+                                            Uteis.MSG(getApplicationContext(), task.getException().getMessage());
                                         }
                                     }
                                 });
                             } else {
-                                Uteis.MSG_Debug(task.getException().getMessage());
+                                Uteis.MSG(getApplicationContext(), task.getException().getMessage());
                             }
                         }
                     });
                 } else {
-                    Uteis.MSG_Debug(task.getException().getMessage());
+                    Uteis.MSG(getApplicationContext(), task.getException().getMessage());
                 }
             }
         });

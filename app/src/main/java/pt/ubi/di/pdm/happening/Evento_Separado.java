@@ -16,9 +16,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 public class Evento_Separado extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth mAuth;
     private String nome, link;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,11 +29,13 @@ public class Evento_Separado extends AppCompatActivity implements View.OnClickLi
         mAuth = FirebaseAuth.getInstance();
         // ir buscar os dados do evento
         Intent intent = getIntent();
-         nome = intent.getStringExtra("nome");
+        nome = intent.getStringExtra("nome");
+        // Mudar o título da action bar
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Evento: " + nome);
         String descricao = intent.getStringExtra("descricao");
         String local = intent.getStringExtra("local");
         String data = intent.getStringExtra("data");
-         link = intent.getStringExtra("link");
+        link = intent.getStringExtra("link");
         String id = intent.getStringExtra("id_user");
         // inicializar os textviews/imagens/buttons
         TextView nome1 = findViewById(R.id.Txt_nomeEvento_separado);
@@ -43,12 +48,12 @@ public class Evento_Separado extends AppCompatActivity implements View.OnClickLi
         y.setOnClickListener(this);
         // colocar os dados nos textviews/imagens
         Picasso.with(this).load(link).into((imagem1));
-        descricao1.setText("Descrição: "+descricao);
-        local1.setText("Local: "+local);
-        data1.setText("Data: "+data);
-        nome1.setText("Nome: "+nome);
-        // se o evento for do utilizador logado, aparece o botao de apagar
-        if (id.equals(mAuth.getCurrentUser().getUid())) {
+        descricao1.setText("Descrição: " + descricao);
+        local1.setText("Local: " + local);
+        data1.setText("Data: " + data);
+        nome1.setText("Nome: " + nome);
+        // se o evento for do utilizador logado ou o admin, aparece o botao de apagar evento
+        if (id.equals(mAuth.getCurrentUser().getUid()) || mAuth.getCurrentUser().getEmail().equals("WTwEe1wgTIXXUM76SiNvz2XdEOF2")) {
             y.setVisibility(View.VISIBLE);
         }
 
@@ -58,8 +63,6 @@ public class Evento_Separado extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(this, EventosActivity.class);
-        startActivity(intent);
         finish();
     }
 
@@ -84,18 +87,15 @@ public class Evento_Separado extends AppCompatActivity implements View.OnClickLi
                 }
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 db.collection("eventos").document(nome).delete().addOnCompleteListener(task -> {
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                Intent intent = new Intent(Evento_Separado.this, EventosActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        }, 1500);
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            finish();
+                        }
+                    }, 1000);
 
                 });
-
 
 
                 break;

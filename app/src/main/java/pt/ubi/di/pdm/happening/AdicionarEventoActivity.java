@@ -37,6 +37,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class AdicionarEventoActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     private FirebaseAuth mAuth;
@@ -49,10 +50,13 @@ public class AdicionarEventoActivity extends AppCompatActivity implements View.O
     private String imageUrl;
     private ImageView img;
     private StorageReference mStorageRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ad_evento);
+        // Mudar o título da action bar
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Criar novo evento");
         // ver se esta logado
         mAuth = FirebaseAuth.getInstance();
         // inicializar botoes
@@ -74,6 +78,7 @@ public class AdicionarEventoActivity extends AppCompatActivity implements View.O
         mStorageRef = FirebaseStorage.getInstance().getReference("imagens");
 
     }
+
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
@@ -88,8 +93,6 @@ public class AdicionarEventoActivity extends AppCompatActivity implements View.O
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i = new Intent(this, EventosActivity.class);
-        startActivity(i);
         finish();
     }
 
@@ -124,7 +127,7 @@ public class AdicionarEventoActivity extends AppCompatActivity implements View.O
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100) {
             if (resultCode == RESULT_OK) {
-                Uteis.MSG_Log( "Imagem selecionada com sucesso");
+                Uteis.MSG_Log("Imagem selecionada com sucesso");
                 img.setImageURI(data.getData());
                 // upload da imagem para FireStorage
                 imageUri = data.getData();
@@ -135,7 +138,7 @@ public class AdicionarEventoActivity extends AppCompatActivity implements View.O
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
         dayFinal = i2;
-        monthFinal = i1+1;
+        monthFinal = i1 + 1;
         yearFinal = i;
         Calendar c = Calendar.getInstance();
         hour = c.get(Calendar.HOUR_OF_DAY);
@@ -187,7 +190,7 @@ public class AdicionarEventoActivity extends AppCompatActivity implements View.O
         }
         Timestamp timestamp = new Timestamp(date);
         // data != null
-        if (dayFinal == 0){
+        if (dayFinal == 0) {
             Uteis.MSG(this, "Selecione uma data");
             return;
         }
@@ -201,10 +204,10 @@ public class AdicionarEventoActivity extends AppCompatActivity implements View.O
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 progressBar.setVisibility(View.GONE);
-                Uteis.MSG_Log( "Imagem carregada com sucesso");
+                Uteis.MSG_Log("Imagem carregada com sucesso");
                 // obter o token de acesso
-                filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>(){
-                    public void onSuccess(Uri uri){
+                filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    public void onSuccess(Uri uri) {
                         String token = uri.toString();
                         // criar evento
                         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -225,8 +228,6 @@ public class AdicionarEventoActivity extends AppCompatActivity implements View.O
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Intent i = new Intent(getApplicationContext(), EventosActivity.class);
-                                        startActivity(i);
                                         finish();
                                     }
                                 }, 1000);
@@ -235,14 +236,15 @@ public class AdicionarEventoActivity extends AppCompatActivity implements View.O
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Uteis.MSG_Log("Error saving Evento"+ e.toString());
+                                Uteis.MSG_Log("Error saving Evento" + e);
                             }
                         });
                     }
                 });
             }
+
             public void onFailure(@NonNull Exception e) {
-                Uteis.MSG_Log( "Erro ao carregar a imagem");
+                Uteis.MSG_Log("Erro ao carregar a imagem");
             }
         });
 

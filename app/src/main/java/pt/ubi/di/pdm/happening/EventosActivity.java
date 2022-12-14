@@ -31,15 +31,18 @@ import java.util.Date;
 import java.util.Objects;
 
 public class EventosActivity extends AppCompatActivity implements View.OnClickListener, RecyclerViewInterface {
+    private final ArrayList<Evento> eventos = new ArrayList<>();
     private FirebaseAuth mAuth;
     private RecyclerView mRecyclerView;
     private StorageReference mStorageRef;
     private ProgressBar mProgressCircle;
-    private ArrayList<Evento> eventos = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eventos);
+        // Mudar o título da action bar
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Eventos");
         // ver se esta logado
         mAuth = FirebaseAuth.getInstance();
         // inicializar botoes
@@ -52,16 +55,32 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
         mProgressCircle.setVisibility(View.VISIBLE);
         // inicilizar db com os eventos e storage
         mStorageRef = FirebaseStorage.getInstance().getReference("imagens");
-        getEventos();
+    }
 
+    // ficar a janela invisivel
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mRecyclerView.setVisibility(View.INVISIBLE);
+    }
+
+
+    @Override
+    // quando voltar para a janela meter visivel e atualizar os eventos
+    protected void onPostResume() {
+        super.onPostResume();
+        mProgressCircle.setVisibility(View.VISIBLE);
+        getEventos();
     }
 
     @Override
+    // quando voltar para tras sair da aplicacao e voltar para o login
     public void onBackPressed() {
         super.onBackPressed();
         mAuth.signOut();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 
     // metodo para criar o menu
@@ -70,21 +89,20 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
     // se clicar nos buttons do menu
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch (id) {
             case R.id.idLogOut:  // Sair e voltar para o inicio
                 mAuth.signOut();
-                Intent i = new Intent(this, MainActivity.class);
-                startActivity(i);
+                startActivity(new Intent(this, LoginActivity.class));
                 this.finish();
                 return true;
             case R.id.idPerfil:
                 // Ir para o perfil
                 Intent j = new Intent(this, PerfilActivity.class);
                 startActivity(j);
-                finish();
                 return true;
 
             default:
@@ -96,11 +114,10 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser == null){
+        if (currentUser == null) {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
-        }
-        else {
+        } else {
         }
 
     }
@@ -108,7 +125,7 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
     // get eventos da db
     // vai buscar todos os eventos e adiciona só os eventos das ultimas 24horas para cima
     private void getEventos() {
-
+        eventos.clear();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("eventos")
                 .get()
@@ -126,8 +143,15 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
                                 // ir buscar o dia anterior para nao aparecer os eventos que ja passaram
                                 Date data_atual = new Date();
                                 data_atual.setDate(data_atual.getDate() - 1);
-                                if(data != null && data.toDate().after(data_atual)){
+                                if (data != null && data.toDate().after(data_atual)) {
                                     eventos.add(new Evento(nome, descricao, local, link, data, id_user));
+                                } else {
+                                    // se o evento ja passou apagar da db
+                                    StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(link);
+                                    if (storageReference != null) {
+                                        storageReference.delete();
+                                    }
+                                    db.collection("eventos").document(nome).delete();
                                 }
                             }
                             // inicializar o recycler view
@@ -137,6 +161,7 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
                         }
                     }
                 });
+
     }
 
 
@@ -146,17 +171,17 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.Btn_adicionar: // se clicar no botao de adicionar vai para a pagina de criar evento
                 Intent Jan = new Intent(this, AdicionarEventoActivity.class);
                 startActivity(Jan);
-                finish();
                 break;
             default:
                 Uteis.MSG(getApplicationContext(), "Esqueceste do on click");
                 break;
         }
     }
+
     // funcao para mostrar os eventos
     // Usa o adapter para ver a quantidade de eventos e mostrar na recycler view em linear layout
     // fica a carregar ate que os eventos estejam todos carregados
-    private void mostrarEventos(){
+    private void mostrarEventos() {
         // mostrar os eventos no recycler view
         mRecyclerView.setVisibility(View.INVISIBLE);
         EventoAdapter adapter = new EventoAdapter(this, eventos, this);
@@ -169,7 +194,7 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
                 mProgressCircle.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);
             }
-        }, 1500);
+        }, 400);
     }
 
     // Função para ir para a pagina do evento_selecionado
@@ -188,6 +213,5 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
         intent.putExtra("data", dateFormatted);
         intent.putExtra("id_user", eventos.get(position).getId_user());
         startActivity(intent);
-        finish();
     }
 }

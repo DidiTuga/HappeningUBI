@@ -1,147 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroud">
 
 
-<RelativeLayout
-android:layout_width="match_parent"
-android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/Edt_eventoNome"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:ems="10"
-            android:hint="@string/STR_cnome"
-            android:textColorHint="@color/escrever"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:padding="5dp"
-            android:importantForAutofill="no"
-            android:inputType="textImeMultiLine|textMultiLine"
-            android:textColor="@color/escrever"
-            android:backgroundTint="@color/button"
-            android:textSize="14sp" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
-    <Button
-        android:id="@+id/Btn_date"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:backgroundTint="@color/button"
-        android:padding="5dp"
-        android:text="@string/Str_date"
-        android:textColor="@color/escrever"
-        android:textColorHint="@color/black"
-        android:textSize="14sp"
-        app:boxStrokeColor="@color/purple_200" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Edt_eventoNome"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/button"
+                android:ems="10"
+                android:hint="@string/STR_cnome"
+                android:importantForAutofill="no"
+                android:inputType="textImeMultiLine|textMultiLine"
+                android:padding="5dp"
+                android:textColor="@color/escrever"
+                android:textColorHint="@color/escrever"
+                android:textSize="14sp" />
 
 
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/Edt_geopoint"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:ems="10"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:padding="5dp"
-            android:backgroundTint="@color/button"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:textColorHint="@color/escrever"
-            android:hint="Localização"
-            android:textColor="@color/escrever"
-            android:textSize="14sp" />
-
-    <Button
-        android:id="@+id/Btn_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:backgroundTint="@color/button"
-        android:ems="10"
-        android:hint="@string/Str_linkImage"
-        android:importantForAutofill="no"
-        android:padding="5dp"
-        android:textColor="@color/escrever"
-        android:textColorHint="@color/white"
-        android:textSize="14sp" />
+            <Button
+                android:id="@+id/Btn_date"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/button"
+                android:padding="5dp"
+                android:text="@string/Str_date"
+                android:textColor="@color/escrever"
+                android:textColorHint="@color/black"
+                android:textSize="14sp"
+                app:boxStrokeColor="@color/purple_200" />
 
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Edt_geopoint"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/button"
+                android:ems="10"
+                android:hint="Localização"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:padding="5dp"
+                android:textColor="@color/escrever"
+                android:textColorHint="@color/escrever"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/Btn_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/button"
+                android:ems="10"
+                android:hint="@string/Str_linkImage"
+                android:importantForAutofill="no"
+                android:padding="5dp"
+                android:textColor="@color/escrever"
+                android:textColorHint="@color/white"
+                android:textSize="14sp" />
 
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/Edt_desEvento"
-            android:layout_width="match_parent"
-            android:layout_height="185dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:backgroundTint="@color/button"
-            android:padding="5dp"
-            android:ems="10"
-            android:hint="@string/STR_descricao"
-            android:textColorHint="@color/escrever"
-            android:importantForAutofill="no"
-            android:inputType="textLongMessage|textImeMultiLine|textMultiLine"
-            android:textColor="@color/escrever"
-            android:textSize="14sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Edt_desEvento"
+                android:layout_width="match_parent"
+                android:layout_height="185dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/button"
+                android:ems="10"
+                android:hint="@string/STR_descricao"
+                android:importantForAutofill="no"
+                android:inputType="textLongMessage|textImeMultiLine|textMultiLine"
+                android:padding="5dp"
+                android:textColor="@color/escrever"
+                android:textColorHint="@color/escrever"
+                android:textSize="14sp" />
 
 
-    <ProgressBar
-        android:id="@+id/Pb_eventoad"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:visibility="gone" />
+            <ProgressBar
+                android:id="@+id/Pb_eventoad"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:visibility="gone" />
 
 
-    <ImageView
-            android:id="@+id/Img_evento"
-            android:layout_height="200dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:padding="5dp"
-            android:layout_width="match_parent" />
+            <ImageView
+                android:id="@+id/Img_evento"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:padding="5dp" />
 
 
-    <Button
-        android:id="@+id/Btn_adEvento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/button"
-        android:text="@string/STR_cnevento"
-        android:textAllCaps="false"
-        android:textColor="@color/escrever" />
+            <Button
+                android:id="@+id/Btn_adEvento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/button"
+                android:text="@string/STR_cnevento"
+                android:textAllCaps="false"
+                android:textColor="@color/escrever" />
 
 
-</LinearLayout>
+        </LinearLayout>
 
-</RelativeLayout>
-    </ScrollView>
+    </RelativeLayout>
+</ScrollView>

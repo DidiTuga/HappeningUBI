@@ -13,20 +13,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    FirebaseAuth mAuth;
     // Variaveis edittexts
     private ProgressBar progressBar;
     private EditText nome, password;
-    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_);
-
+        // Tirar o título da action bar
+        Objects.requireNonNull(getSupportActionBar()).hide();
         // Inicializar os botoes
         Button x = findViewById(R.id.Btn_entrar);
         x.setOnClickListener(this);
@@ -42,11 +44,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // ver se esta logado
         FirebaseApp.initializeApp(this);
         mAuth = FirebaseAuth.getInstance(); // null se nao estiver logado
-
-
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     // Ver se esta logado
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
@@ -66,7 +75,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.Txt_registar: // Vai para a activity de registar
                 Intent Jan = new Intent(this, RegistarActivity.class);
                 startActivity(Jan);
-                finish();
                 break;
             case R.id.Edt_nome: // Limpa o edittext
                 nome.setText("");
@@ -84,14 +92,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     // funcao para fazer login
     // Vai buscar os dados do utilizador e tenta fazer login
     // Se conseguir vai para a pagina principal se nao dá uma mensagem de erro
-    public void loginUser(){
+    public void loginUser() {
         String email = nome.getText().toString();
         String pass = password.getText().toString();
-        if(email.isEmpty() || pass.isEmpty()){
+        if (email.isEmpty() || pass.isEmpty()) {
             Uteis.MSG(getApplicationContext(), "Preencha todos os campos");
-        }else{
+        } else {
             mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this, task -> {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     progressBar.setVisibility(View.VISIBLE);
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -100,9 +108,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Intent Jan = new Intent(getApplicationContext(), EventosActivity.class);
                             startActivity(Jan);
                             finish();
-                        }}, 1000);
+                        }
+                    }, 1000);
 
-                }else{
+                } else {
                     Uteis.MSG(getApplicationContext(), "Erro ao logar");
                 }
             });

@@ -18,14 +18,15 @@ import java.util.Date;
 
 public class EventoAdapter extends RecyclerView.Adapter<EventoAdapter.ViewHolder> {
     private final RecyclerViewInterface recyclerViewInterface; // Buscar a posicao do evento
-    private Context context; // Contexto
-    private ArrayList<Evento> eventos; // Array de eventos
+    private final Context context; // Contexto
+    private final ArrayList<Evento> eventos; // Array de eventos
 
     public EventoAdapter(Context context, ArrayList<Evento> eventos, RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
         this.eventos = eventos;
         this.recyclerViewInterface = recyclerViewInterface;
     }
+
     @NonNull
     @Override
     // Criar o view holder com o layout do evento card
@@ -52,9 +53,11 @@ public class EventoAdapter extends RecyclerView.Adapter<EventoAdapter.ViewHolder
     public int getItemCount() {
         return eventos.size();
     }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imagem;
         public TextView nome, data, local;
+
         public ViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
             imagem = itemView.findViewById(R.id.Img_evento1);
@@ -66,7 +69,7 @@ public class EventoAdapter extends RecyclerView.Adapter<EventoAdapter.ViewHolder
                 public void onClick(View v) {
                     if (recyclerViewInterface != null) {
                         int position = getAdapterPosition();
-                        if(position != RecyclerView.NO_POSITION) {
+                        if (position != RecyclerView.NO_POSITION) {
                             recyclerViewInterface.onEventoClick(position);
                         }
                     }

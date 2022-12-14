@@ -23,4 +23,5 @@
     <string name="Str_apagarE">Apagar Evento</string>
     <string name="Str_editar">Editar perfil</string>
     <string name="Str_novaPass">Nova Password</string>
+    <string name="versao">Versão 1.1</string>
 </resources>

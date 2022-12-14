@@ -21,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class RegistarActivity extends AppCompatActivity implements View.OnClickListener {
     EditText email, password, nome, telemovel, idade;
@@ -30,8 +31,9 @@ public class RegistarActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_registar);
+        // Tirar o título da action bar
+        Objects.requireNonNull(getSupportActionBar()).hide();
         // Inicializar os botoes
         Button x = findViewById(R.id.Btn_registar);
         x.setOnClickListener(this);
@@ -53,7 +55,8 @@ public class RegistarActivity extends AppCompatActivity implements View.OnClickL
         // ver se esta logado
         mAuth = FirebaseAuth.getInstance(); // vai ser null provavelmente
     }
-    public void onStart(){
+
+    public void onStart() {
         super.onStart();
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
@@ -71,8 +74,6 @@ public class RegistarActivity extends AppCompatActivity implements View.OnClickL
                 createUser();
                 break;
             case R.id.Btn_voltar: // voltar para a pagina de login
-                Intent Jan = new Intent(this, LoginActivity.class);
-                startActivity(Jan);
                 finish();
                 break;
             default:
@@ -101,8 +102,6 @@ public class RegistarActivity extends AppCompatActivity implements View.OnClickL
                 if (task.isSuccessful()) {
                     Uteis.MSG(getApplicationContext(), "Registado com sucesso");
                     saveuser();
-                    Intent Jan = new Intent(this, LoginActivity.class);
-                    startActivity(Jan);
                     finish();
                 } else {
                     String erro;
@@ -123,6 +122,7 @@ public class RegistarActivity extends AppCompatActivity implements View.OnClickL
             });
         }
     }
+
     // funcao para guardar os dados do user na base de dados
     private void saveuser() {
         String nome_ = nome.getText().toString();
