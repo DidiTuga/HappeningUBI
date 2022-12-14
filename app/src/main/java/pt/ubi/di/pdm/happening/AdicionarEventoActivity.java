@@ -88,6 +88,8 @@ public class AdicionarEventoActivity extends AppCompatActivity implements View.O
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Intent i = new Intent(this, EventosActivity.class);
+        startActivity(i);
         finish();
     }
 
@@ -133,7 +135,7 @@ public class AdicionarEventoActivity extends AppCompatActivity implements View.O
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
         dayFinal = i2;
-        monthFinal = i1;
+        monthFinal = i1+1;
         yearFinal = i;
         Calendar c = Calendar.getInstance();
         hour = c.get(Calendar.HOUR_OF_DAY);

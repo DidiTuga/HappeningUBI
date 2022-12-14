@@ -82,6 +82,13 @@
         android:textColorHint="@color/escrever"
         android:textSize="18sp" />
 
+    <ProgressBar
+        android:id="@+id/Pb_editarUser"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+
+        android:layout_margin="10dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -111,12 +118,5 @@
             android:textColor="@color/escrever"
             android:text="Apagar" />
     </LinearLayout>
-
-    <ProgressBar
-        android:id="@+id/Pb_editarUser"
-        android:layout_width="match_parent"
-        android:layout_margin="10dp"
-
-        android:layout_height="37dp" />
 
 </LinearLayout>

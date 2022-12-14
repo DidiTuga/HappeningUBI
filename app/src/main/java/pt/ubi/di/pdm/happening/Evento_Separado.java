@@ -54,6 +54,15 @@ public class Evento_Separado extends AppCompatActivity implements View.OnClickLi
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, EventosActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     // Ver se o utilizador está logado
     public void onStart() {
         super.onStart();

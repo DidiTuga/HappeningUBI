@@ -45,7 +45,7 @@ public class EditarPerfilActivity extends AppCompatActivity implements View.OnCl
         telemovel = findViewById(R.id.Edt_novoTelefone);
         idade = findViewById(R.id.Edt_novaIdade);
         Pb = findViewById(R.id.Pb_editarUser);
-        Pb.setVisibility(View.GONE);
+        Pb.setVisibility(View.INVISIBLE);
         // botao para ouvir
         findViewById(R.id.Btn_editarUser).setOnClickListener(this);
         findViewById(R.id.Btn_apagarUser).setOnClickListener(this);
@@ -79,6 +79,8 @@ public class EditarPerfilActivity extends AppCompatActivity implements View.OnCl
 
     public void onBackPressed() {
         super.onBackPressed();
+        Intent intent = new Intent(EditarPerfilActivity.this, PerfilActivity.class);
+        startActivity(intent);
         finish();
     }
 
@@ -92,6 +94,8 @@ public class EditarPerfilActivity extends AppCompatActivity implements View.OnCl
                 builder.setTitle(Html.fromHtml("<font color='#ffed5e'>Editar Perfil</font>"));
                 builder.setMessage(Html.fromHtml("<font color='#fffbcb'>Tem a certeza que quer editar o seu perfil?</font>"));
                 builder.setPositiveButton("Sim", (dialog, which) -> {
+                    Pb.setVisibility(View.VISIBLE);
+
                     editarPerfil();
                 });
                 builder.setNegativeButton("Voltar", (dialog, which) -> {
@@ -112,11 +116,13 @@ public class EditarPerfilActivity extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.Btn_apagarUser:
                 // apagar o user
+
                 // Mensagem de dialog a confirmar se quer mesmo editar
                 AlertDialog.Builder fim = new AlertDialog.Builder(this);
                 fim.setTitle(Html.fromHtml("<font color='#ffed5e'>Editar Perfil</font>"));
                 fim.setMessage(Html.fromHtml("<font color='#fffbcb'>Tem a certeza que quer apagar o seu perfil?</font>"));
                 fim.setPositiveButton("Sim", (dialog, which) -> {
+                    Pb.setVisibility(View.VISIBLE);
                     apagarUser();
                 });
                 fim.setNegativeButton("Voltar", (dialog, which) -> {
@@ -142,7 +148,6 @@ public class EditarPerfilActivity extends AppCompatActivity implements View.OnCl
     // Apaga o user da base de dados e do firebase auth
     private void apagarUser() {
         // apagar o user
-        Pb.setVisibility(View.VISIBLE);
         user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

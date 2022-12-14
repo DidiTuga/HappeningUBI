@@ -70,6 +70,8 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Intent intent = new Intent(this, EventosActivity.class);
+        startActivity(intent);
         finish();
     }
 
@@ -81,6 +83,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
                 Intent intent = new Intent(this, EditarPerfilActivity.class);
                 intent.putExtra("nome", nomeS);
                 startActivity(intent);
+                finish();
                 break;
         }
     }

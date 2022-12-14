@@ -99,6 +99,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             progressBar.setVisibility(View.GONE);
                             Intent Jan = new Intent(getApplicationContext(), EventosActivity.class);
                             startActivity(Jan);
+                            finish();
                         }}, 1000);
 
                 }else{

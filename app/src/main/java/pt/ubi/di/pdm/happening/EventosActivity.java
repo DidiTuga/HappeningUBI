@@ -55,6 +55,15 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
         getEventos();
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mAuth.signOut();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
     // metodo para criar o menu
     public boolean onCreateOptionsMenu(Menu menu) {
         //on below line we are inflating our menu file for displaying our menu options.
@@ -75,6 +84,7 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
                 // Ir para o perfil
                 Intent j = new Intent(this, PerfilActivity.class);
                 startActivity(j);
+                finish();
                 return true;
 
             default:
@@ -136,6 +146,7 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.Btn_adicionar: // se clicar no botao de adicionar vai para a pagina de criar evento
                 Intent Jan = new Intent(this, AdicionarEventoActivity.class);
                 startActivity(Jan);
+                finish();
                 break;
             default:
                 Uteis.MSG(getApplicationContext(), "Esqueceste do on click");
@@ -177,5 +188,6 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
         intent.putExtra("data", dateFormatted);
         intent.putExtra("id_user", eventos.get(position).getId_user());
         startActivity(intent);
+        finish();
     }
 }
