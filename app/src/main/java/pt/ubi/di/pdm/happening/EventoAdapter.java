@@ -60,10 +60,10 @@ public class EventoAdapter extends RecyclerView.Adapter<EventoAdapter.ViewHolder
 
         public ViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
-            imagem = itemView.findViewById(R.id.Img_evento1);
-            nome = itemView.findViewById(R.id.Txt_nomeEvento);
-            data = itemView.findViewById(R.id.Txt_dataEvento);
-            local = itemView.findViewById(R.id.Txt_localEvento);
+            imagem = itemView.findViewById(R.id.Img_evento2);
+            nome = itemView.findViewById(R.id.Txt_nomeEvento2);
+            data = itemView.findViewById(R.id.Txt_dataEvento2);
+            local = itemView.findViewById(R.id.Txt_localEvento2);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

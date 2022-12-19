@@ -1,71 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_margin="5dp"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="3dp">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/backgroud">
+        android:layout_width="410dp"
+        android:layout_height="170dp"
+        android:background="@drawable/background7"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="280dp">
 
         <ImageView
-            android:id="@+id/Img_evento1"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop" />
-
-        <TextView
-            android:id="@+id/Txt_nomeEvento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Img_evento1"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="3dp"
-            android:layout_marginBottom="3dp"
-            android:layout_toStartOf="@id/Txt_dataEvento"
-            android:layout_toLeftOf="@id/Txt_dataEvento"
-            android:padding="4dp"
-            android:text="Evento"
-            android:textColor="@color/escrever"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/Txt_dataEvento"
+            android:id="@+id/Img_evento2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Img_evento1"
+            android:layout_height="141dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_margin="3dp"
-            android:gravity="center"
-            android:padding="4dp"
-            android:text="Dia"
-            android:textColor="@color/escrever"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="263dp"
+            android:layout_marginBottom="14dp" />
 
         <TextView
-            android:id="@+id/Txt_localEvento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Img_evento1"
-            android:layout_margin="3dp"
-            android:layout_toLeftOf="@id/Txt_dataEvento"
-            android:gravity="center"
-            android:padding="4dp"
+            android:id="@+id/Txt_nomeEvento2"
+            android:layout_width="230dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="165dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="123dp"
+            android:text="Nome do Evento"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/Txt_localEvento2"
+            android:layout_width="231dp"
+            android:layout_height="33dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="166dp"
+            android:layout_marginTop="69dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="68dp"
             android:text="Local"
-            android:textColor="@color/escrever"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textSize="16sp" />
 
-
+        <TextView
+            android:id="@+id/Txt_dataEvento2"
+            android:layout_width="233dp"
+            android:layout_height="31dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="165dp"
+            android:layout_marginTop="119dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="20dp"
+            android:text="Data"
+            android:textSize="16sp" />
     </RelativeLayout>
-
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
