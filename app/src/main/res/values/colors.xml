@@ -12,9 +12,9 @@
     <color name="backgroud">#122a29</color>
     <color name="backgroud_2">#0a5f9b</color>
     <color name="button">#ff7e32</color>
-    <color name="overButton">#ffed5e</color>
+    <color name="overButton">#FFFFFFFF</color>
     <color name="escrever">#fffbcb</color>
 
     <color name="black_shade_1">#1E000000</color>
-
+    <color name="board_btn">#07396b</color>
 </resources>

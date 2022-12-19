@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroud"
+    android:background="@drawable/background3"
     tools:context=".MainActivity">
 
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="633dp"
-        android:layout_height="348dp"
-        android:layout_marginTop="132dp"
+        android:layout_width="159dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="92dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,34 +21,37 @@
 
     <Button
         android:id="@+id/Btn_comecar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="494dp"
-        android:backgroundTint="@color/button"
+        android:layout_width="242dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="496dp"
+        android:background="@drawable/board_textview"
+        android:backgroundTint="@color/backgroud_2"
         android:text="@string/STR_Comecar"
-        android:textColor="@color/escrever"
 
+        android:textColor="@color/overButton"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!---textview a dizer a versão do programa no meio e no fundo do programa-->
+
 
     <Button
         android:id="@+id/Btn_ajudar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="579dp"
-        android:backgroundTint="@color/button"
+        android:layout_width="242dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="556dp"
+        android:background="@drawable/board_textview"
+        android:backgroundTint="@color/backgroud_2"
         android:text="@string/STR_ajuda"
-        android:textColor="@color/escrever"
+        android:textColor="@color/overButton"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <!---textview a dizer a versão do programa no meio e no fundo do programa-->
-
 
     <TextView
         android:id="@+id/versao"
@@ -56,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:text="@string/versao"
-        android:textColor="@color/escrever"
+        android:textColor="@color/overButton"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

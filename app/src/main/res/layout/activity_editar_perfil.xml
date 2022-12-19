@@ -4,9 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroud"
+    android:background="@drawable/background7"
     android:orientation="vertical">
-
 
     <ImageView
         android:id="@+id/imageView3"
@@ -17,12 +16,17 @@
 
     <TextView
         android:id="@+id/Txt_nomeUser_edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="394dp"
+        android:layout_height="46dp"
         android:layout_margin="10dp"
+        android:background="@drawable/board_textview"
+        android:drawableLeft="@drawable/ic_username"
+        android:drawablePadding="10dp"
+        android:paddingLeft="20dp"
+        android:paddingEnd="10dp"
         android:text="TextView"
-        android:textColor="@color/escrever"
-        android:textColorHint="@color/escrever"
+        android:textColor="@color/overButton"
+        android:textColorHint="@color/overButton"
         android:textSize="25sp" />
 
     <EditText
@@ -30,13 +34,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:backgroundTint="@color/button"
+        android:background="@drawable/board_textview"
+        android:drawableLeft="@drawable/email"
+        android:drawablePadding="10dp"
         android:ems="10"
         android:hint="@string/STR_email"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
-        android:textColor="@color/escrever"
-        android:textColorHint="@color/escrever"
+        android:paddingLeft="20dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/overButton"
+        android:textColorHint="@color/overButton"
         android:textSize="18sp" />
 
     <EditText
@@ -44,13 +52,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:backgroundTint="@color/button"
+        android:background="@drawable/board_textview"
+        android:drawableLeft="@drawable/ic_baseline_phone_iphone_24"
+        android:drawablePadding="10dp"
         android:ems="10"
         android:hint="@string/STR_movel"
         android:inputType="phone"
         android:minHeight="48dp"
-        android:textColor="@color/escrever"
-        android:textColorHint="@color/escrever"
+        android:paddingLeft="20dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/overButton"
+        android:textColorHint="@color/overButton"
         android:textSize="18sp" />
 
     <EditText
@@ -58,13 +70,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:backgroundTint="@color/button"
+        android:background="@drawable/board_textview"
+        android:drawableLeft="@drawable/ic_baseline_calendar_month_24"
+        android:drawablePadding="10dp"
         android:ems="10"
         android:hint="@string/STR_idade"
         android:inputType="number"
         android:minHeight="48dp"
-        android:textColor="@color/escrever"
-        android:textColorHint="@color/escrever"
+        android:paddingLeft="20dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/overButton"
         android:textSize="18sp" />
 
     <EditText
@@ -72,13 +88,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:backgroundTint="@color/button"
+        android:background="@drawable/board_textview"
+        android:drawableLeft="@drawable/password"
+        android:drawablePadding="10dp"
         android:ems="10"
         android:hint="@string/Str_novaPass"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:textColor="@color/escrever"
-        android:textColorHint="@color/escrever"
+        android:paddingLeft="20dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/overButton"
+        android:textColorHint="@color/overButton"
         android:textSize="18sp" />
 
     <ProgressBar
@@ -100,9 +120,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/button"
+            android:background="@drawable/board_textview"
+            android:backgroundTint="@color/backgroud_2"
             android:text="Editar"
-            android:textColor="@color/escrever"
+            android:textColor="@color/overButton"
             android:textSize="18sp" />
 
         <Button
@@ -111,9 +132,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
+            android:background="@drawable/board_textview"
             android:backgroundTint="@color/red"
             android:text="Apagar"
-            android:textColor="@color/escrever"
+            android:textColor="@color/overButton"
             android:textSize="18sp" />
     </LinearLayout>
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroud"
+    android:background="@drawable/background7"
     tools:context=".Evento_Separado">
 
     <ImageView
@@ -26,7 +26,7 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="20dp"
         android:text="Nome"
-        android:textColor="@color/escrever"
+        android:textColor="@color/overButton"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +41,7 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="24dp"
         android:text="TextView"
-        android:textColor="@color/escrever"
+        android:textColor="@color/overButton"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -55,7 +55,7 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="28dp"
         android:text="TextView"
-        android:textColor="@color/escrever"
+        android:textColor="@color/overButton"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -69,7 +69,7 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="36dp"
         android:text="TextView"
-        android:textColor="@color/escrever"
+        android:textColor="@color/white"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -78,16 +78,17 @@
 
     <Button
         android:id="@+id/Btn_ApagarEvento_separado"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="303dp"
+        android:layout_height="58dp"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="92dp"
-        android:backgroundTint="@color/button"
+        android:layout_marginTop="68dp"
+        android:background="@drawable/board_textview"
+        android:backgroundTint="@color/backgroud_2"
         android:text="@string/Str_apagarE"
-        android:textColor="@color/escrever"
+        android:textColor="@color/overButton"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Txt_localEvento_separado" />
 </androidx.constraintlayout.widget.ConstraintLayout>

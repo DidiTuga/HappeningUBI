@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroud">
+    android:background="@color/board_btn">
 
 
     <RelativeLayout
@@ -13,6 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/background7"
             android:orientation="vertical">
 
 
@@ -23,14 +24,14 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:backgroundTint="@color/button"
+                android:background="@drawable/board_textview"
                 android:ems="10"
                 android:hint="@string/STR_cnome"
                 android:importantForAutofill="no"
                 android:inputType="textImeMultiLine|textMultiLine"
                 android:padding="5dp"
-                android:textColor="@color/escrever"
-                android:textColorHint="@color/escrever"
+                android:textColor="@color/overButton"
+                android:textColorHint="@color/overButton"
                 android:textSize="14sp" />
 
 
@@ -41,10 +42,11 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:backgroundTint="@color/button"
+                android:background="@drawable/board_textview"
+                android:backgroundTint="@color/board_btn"
                 android:padding="5dp"
                 android:text="@string/Str_date"
-                android:textColor="@color/escrever"
+                android:textColor="@color/overButton"
                 android:textColorHint="@color/black"
                 android:textSize="14sp"
                 app:boxStrokeColor="@color/purple_200" />
@@ -57,14 +59,14 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:backgroundTint="@color/button"
+                android:background="@drawable/board_textview"
                 android:ems="10"
                 android:hint="Localização"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:padding="5dp"
-                android:textColor="@color/escrever"
-                android:textColorHint="@color/escrever"
+                android:textColor="@color/overButton"
+                android:textColorHint="@color/overButton"
                 android:textSize="14sp" />
 
             <Button
@@ -74,12 +76,13 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:backgroundTint="@color/button"
+                android:background="@drawable/board_textview"
+                android:backgroundTint="@color/backgroud_2"
                 android:ems="10"
                 android:hint="@string/Str_linkImage"
                 android:importantForAutofill="no"
                 android:padding="5dp"
-                android:textColor="@color/escrever"
+                android:textColor="@color/overButton"
                 android:textColorHint="@color/white"
                 android:textSize="14sp" />
 
@@ -91,14 +94,14 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:backgroundTint="@color/button"
+                android:backgroundTint="@color/overButton"
                 android:ems="10"
                 android:hint="@string/STR_descricao"
                 android:importantForAutofill="no"
                 android:inputType="textLongMessage|textImeMultiLine|textMultiLine"
                 android:padding="5dp"
-                android:textColor="@color/escrever"
-                android:textColorHint="@color/escrever"
+                android:textColor="@color/overButton"
+                android:textColorHint="@color/overButton"
                 android:textSize="14sp" />
 
 
@@ -122,7 +125,6 @@
                 android:layout_marginRight="10dp"
                 android:padding="5dp" />
 
-
             <Button
                 android:id="@+id/Btn_adEvento"
                 android:layout_width="match_parent"
@@ -131,10 +133,11 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/button"
+                android:background="@drawable/board_textview"
+                android:backgroundTint="@color/backgroud_2"
                 android:text="@string/STR_cnevento"
                 android:textAllCaps="false"
-                android:textColor="@color/escrever" />
+                android:textColor="@color/overButton" />
 
 
         </LinearLayout>

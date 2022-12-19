@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroud"
+    android:background="@drawable/background7"
     tools:context=".PerfilActivity">
 
     <TextView
@@ -61,16 +61,16 @@
 
     <Button
         android:id="@+id/Btn_altUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="269dp"
+        android:layout_height="45dp"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="68dp"
+        android:background="@drawable/board_textview"
         android:backgroundTint="@color/button"
         android:text="@string/Str_editar"
-        android:textColor="@color/escrever"
+        android:textColor="@color/overButton"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Txt_teleUser" />
 

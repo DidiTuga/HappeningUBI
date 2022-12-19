@@ -38,8 +38,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         nome = findViewById(R.id.Edt_nome);
         nome.setOnClickListener(this);
         password = findViewById(R.id.Edt_password);
-        progressBar = findViewById(R.id.prog);
-        progressBar.setVisibility(View.INVISIBLE);
+        //progressBar = findViewById(R.id.prog);
+        //progressBar.setVisibility(View.INVISIBLE);
         password.setOnClickListener(this);
         // ver se esta logado
         FirebaseApp.initializeApp(this);
