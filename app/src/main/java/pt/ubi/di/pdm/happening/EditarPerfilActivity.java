@@ -3,6 +3,7 @@ package pt.ubi.di.pdm.happening;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
@@ -35,6 +36,7 @@ public class EditarPerfilActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_editar_perfil);
         // Mudar o título da action bar
         Objects.requireNonNull(getSupportActionBar()).setTitle("Editar Perfil");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.backgroud_2)));
         // ir buscar os dados do user
         Intent intent = getIntent();
         String nome = intent.getStringExtra("nome");
@@ -88,8 +90,8 @@ public class EditarPerfilActivity extends AppCompatActivity implements View.OnCl
                 // guardar os dados
                 // Mensagem de dialog a confirmar se quer mesmo editar
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle(Html.fromHtml("<font color='#ffed5e'>Editar Perfil</font>"));
-                builder.setMessage(Html.fromHtml("<font color='#fffbcb'>Tem a certeza que quer editar o seu perfil?</font>"));
+                builder.setTitle(Html.fromHtml("<font color='#ffffff'>Editar Perfil</font>"));
+                builder.setMessage(Html.fromHtml("<font color='#ffffff'>Tem a certeza que quer editar o seu perfil?</font>"));
                 builder.setPositiveButton("Sim", (dialog, which) -> {
                     Pb.setVisibility(View.VISIBLE);
 
@@ -104,8 +106,8 @@ public class EditarPerfilActivity extends AppCompatActivity implements View.OnCl
                 alert.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
                     public void onShow(DialogInterface dialogInterface) {
-                        alert.getWindow().setBackgroundDrawableResource(R.color.backgroud);
-                        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#ff7e32"));
+                        alert.getWindow().setBackgroundDrawableResource(R.color.backgroud_2);
+                        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#07396b"));
                         alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#A80F0F"));
                     }
                 });
@@ -116,8 +118,8 @@ public class EditarPerfilActivity extends AppCompatActivity implements View.OnCl
 
                 // Mensagem de dialog a confirmar se quer mesmo editar
                 AlertDialog.Builder fim = new AlertDialog.Builder(this);
-                fim.setTitle(Html.fromHtml("<font color='#ffed5e'>Editar Perfil</font>"));
-                fim.setMessage(Html.fromHtml("<font color='#fffbcb'>Tem a certeza que quer apagar o seu perfil?</font>"));
+                fim.setTitle(Html.fromHtml("<font color='#ffffff'>Editar Perfil</font>"));
+                fim.setMessage(Html.fromHtml("<font color='#ffffff'>Tem a certeza que quer apagar o seu perfil?</font>"));
                 fim.setPositiveButton("Sim", (dialog, which) -> {
                     Pb.setVisibility(View.VISIBLE);
                     apagarUser();
@@ -131,8 +133,8 @@ public class EditarPerfilActivity extends AppCompatActivity implements View.OnCl
                 dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
                     public void onShow(DialogInterface dialogInterface) {
-                        dialog.getWindow().setBackgroundDrawableResource(R.color.backgroud);
-                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#ff7e32"));
+                        dialog.getWindow().setBackgroundDrawableResource(R.color.backgroud_2);
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#A80F0F"));
                         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#A80F0F"));
                     }
                 });

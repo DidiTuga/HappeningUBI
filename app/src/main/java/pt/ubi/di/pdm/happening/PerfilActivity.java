@@ -1,6 +1,7 @@
 package pt.ubi.di.pdm.happening;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +30,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_perfil);
         // Mudar o título da action bar
         Objects.requireNonNull(getSupportActionBar()).setTitle("Perfil");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.backgroud_2)));
         // inicializar textviews
         nome = findViewById(R.id.Txt_nomeUser);
         email = findViewById(R.id.Txt_emailUser);

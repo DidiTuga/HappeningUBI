@@ -1,6 +1,7 @@
 package pt.ubi.di.pdm.happening;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -32,6 +33,8 @@ public class Evento_Separado extends AppCompatActivity implements View.OnClickLi
         nome = intent.getStringExtra("nome");
         // Mudar o título da action bar
         Objects.requireNonNull(getSupportActionBar()).setTitle("Evento: " + nome);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.backgroud_2)));
+        // inicializar conteudos
         String descricao = intent.getStringExtra("descricao");
         String local = intent.getStringExtra("local");
         String data = intent.getStringExtra("data");

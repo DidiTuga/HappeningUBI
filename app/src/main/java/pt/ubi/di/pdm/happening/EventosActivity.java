@@ -1,6 +1,7 @@
 package pt.ubi.di.pdm.happening;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -43,6 +44,8 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_eventos);
         // Mudar o título da action bar
         Objects.requireNonNull(getSupportActionBar()).setTitle("Eventos");
+        // Mudar a cor da action bar para a cor primária
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.backgroud_2)));
         // ver se esta logado
         mAuth = FirebaseAuth.getInstance();
         // inicializar botoes

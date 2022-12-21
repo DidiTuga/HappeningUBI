@@ -39,14 +39,14 @@ public class EventoAdapter extends RecyclerView.Adapter<EventoAdapter.ViewHolder
     // Buscar os valores para colocar no evento card
     public void onBindViewHolder(@NonNull EventoAdapter.ViewHolder holder, int position) {
         Picasso.with(context).load(eventos.get(position).getLink()).into(holder.imagem);
-        holder.nome.setText(eventos.get(position).getNome());
+        holder.nome.setText("Nome: "+eventos.get(position).getNome());
         // timestamp to date
         Date date = eventos.get(position).getData().toDate();
         DateFormat formatter = DateFormat.getDateTimeInstance();
         String dateFormatted = formatter.format(date);
-        holder.data.setText(dateFormatted);
+        holder.data.setText("Data: " + dateFormatted);
 
-        holder.local.setText(eventos.get(position).getLocal());
+        holder.local.setText("Local: " + eventos.get(position).getLocal());
     }
 
     @Override

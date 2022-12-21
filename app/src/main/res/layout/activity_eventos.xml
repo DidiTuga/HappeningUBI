@@ -33,7 +33,7 @@
         android:minHeight="48dp"
         android:src="@drawable/ic_add"
         app:background="@color/overButton"
-        app:backgroundTint="@color/backgroud_2"
+        app:backgroundTint="@color/board_btn"
         app:tint="@color/escrever"
         tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 

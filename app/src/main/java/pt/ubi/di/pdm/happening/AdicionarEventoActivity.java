@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -57,6 +58,8 @@ public class AdicionarEventoActivity extends AppCompatActivity implements View.O
         setContentView(R.layout.activity_ad_evento);
         // Mudar o título da action bar
         Objects.requireNonNull(getSupportActionBar()).setTitle("Criar novo evento");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.backgroud_2)));
+
         // ver se esta logado
         mAuth = FirebaseAuth.getInstance();
         // inicializar botoes

@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="410dp"
         android:layout_height="170dp"
-        android:background="@drawable/background7"
+        android:background="@drawable/backgroud_card2"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="280dp">
 
@@ -38,7 +38,9 @@
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="123dp"
             android:text="Nome do Evento"
-            android:textSize="16sp" />
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/Txt_localEvento2"
@@ -53,7 +55,9 @@
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="68dp"
             android:text="Local"
-            android:textSize="16sp" />
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/Txt_dataEvento2"
@@ -68,6 +72,8 @@
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="20dp"
             android:text="Data"
-            android:textSize="16sp" />
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
